@@ -14,6 +14,13 @@ public class MainActivity extends AppCompatActivity {
 
     int randomNumber;
 
+    public void generateRandomNum() {
+
+        Random rand = new Random();
+        randomNumber = rand.nextInt(20) + 1;
+
+    }
+
     // access the randomNumber in this method but not create in this method
     // otherwise it will generate a new random number each time button is pressed
     public void guess(View view) {
@@ -31,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
             message = "Higher";
         else if (guessVal > randomNumber)
             message = "Lower";
-        else
-            message = "You got it!";
+        else {
+            message = "You got it! Try again";
+            generateRandomNum();
+        }
 
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 
@@ -47,7 +56,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Random rand = new Random();
-        randomNumber = rand.nextInt(20) + 1;
+        generateRandomNum();
     }
 }
